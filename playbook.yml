@@ -1,0 +1,33 @@
+---
+- name: Gather information about installed Oracle components
+  hosts: ora-servers
+  gather_facts: true
+  become: true
+  become_user: '{{ oracle_user }}'
+
+  tasks:
+
+  - import_role:
+      name: oracle-gatherinfo-gi
+    tags:
+      - oracle-gatherinfo-gi
+      - oracle-gatherinfo-allcomponents
+
+  - import_role:
+      name: oracle-gatherinfo-databases
+    tags:
+      - oracle-gatherinfo-databases
+      - oracle-gatherinfo-allcomponents
+
+  - import_role:
+      name: oracle-gatherinfo-listener
+    tags:
+      - oracle-gatherinfo-listener
+      - oracle-gatherinfo-allcomponents
+
+  - import_role:
+      name: oracle-gatherinfo-dbconsole
+    tags:
+      - oracle-gatherinfo-dbconsole
+      - oracle-gatherinfo-allcomponents
+
